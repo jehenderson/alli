@@ -6,6 +6,8 @@ RUN npm install -g yarn
 WORKDIR /home/app/frontend
 ADD ./frontend/package.json /home/app/frontend
 ADD ./frontend/yarn.lock /home/app/frontend
-RUN yarn install
+RUN yarn install --silent
+RUN yarn install @material-ui/core --silent
+RUN yarn install @material-ui/icons --silent
 COPY ./frontend /home/app/frontend
 CMD ["yarn", "start"]

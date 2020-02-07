@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Album from './template/Album';
 import './App.css';
 
 const API_ROUTE = '/api/v1';
@@ -29,6 +30,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Album />
         <div className="App-header">
           <h2>React Rails Docker Container</h2>
         </div>
