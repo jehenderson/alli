@@ -1,6 +1,6 @@
-FROM ruby:2.3
+FROM ruby:latest
 ENV HOME /root
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g yarn
 WORKDIR /home/app/frontend
