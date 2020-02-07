@@ -18,7 +18,6 @@ cache:
   directories:
   - node_modules
 script:
-- curl localhost:8000
-- curl localhost:3000
+- curl localhost
 after_script:
 - docker-compose down
