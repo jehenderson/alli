@@ -18,7 +18,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   user: backend
-  password: mysecretpassword
+  password: skyuber
   host: postgres
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
