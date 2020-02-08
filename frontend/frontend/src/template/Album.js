@@ -26,6 +26,92 @@ function Copyright() {
   );
 }
 
+const cards = [
+  {
+    id: 'confidentiality',
+    heading: "Your Confidentiality",
+    content: `Your answers will not be stored, and our organization will never
+              share your usage data with any other party.`,
+    show: true
+  },
+  {
+    id: 'choices',
+    heading: "Your Choices",
+    content: `No legal jargon and no surprises. Once you select your timeframe,
+              Athena will connect you with relevant resources, sorted by priority
+              and urgency.`,
+    show: true
+  },
+  {
+    id: 'decisions',
+    heading: "Your Decisions",
+    content: `Athena will never automatically submit information or contact any
+              resource on your behalf. You control your journey.`,
+    show: true
+  },
+  {
+    id: 'medical',
+    heading: "Medical Care",
+    content: `Concerned about injuries, sexually-transmitted diseases,
+              or possible pregnancy?\n
+              The UVA Health System provides medical care to prevent possible
+              infections and pregnancy. For evidence collection, a SANE Nurse
+              can administer a forensic exam if the incident occurred within
+              120 hours (5 days).`,
+    show: false
+  },
+  {
+    id: 'police',
+    heading: "Police Reporting",
+    content: `Contact the police if you want to open a police investigation.
+              The police have unique legal authority to execute search warrants,
+              collect evidence, and make arrests.`,
+    show: false
+  },
+  {
+    id: 'counseling_advocacy',
+    heading: "Advocacy & Counseling",
+    content: `There are a number of dedicated hotlines, counselors, and
+              advocates available 24/7.\n
+              These free resources are completely confidential, which which
+              means they do not have to report the incident to the University
+              or Police.`,
+    show: false
+  },
+  {
+    id: 'university_reporting',
+    heading: "University Reporting",
+    content: `A formal University report is filed through Just Report It, and
+              immediately triggers a Title IX investigation. There is no time
+              limit for reporting to the University.\n
+              Reporting to the University can be done anonymously.
+              Making a report doesn’t require the reporter to participate in
+              any University investigations.`,
+    show: false
+  },
+  {
+    id: 'legal',
+    heading: "Legal Representation",
+    content: `Survivors have access to legal resources throughout the entire
+              process. Legal resources have years of experience in this field,
+              and serve as capable advocates from the beginning. Athena
+              prioritizes connecting survivors with free legal resources.\n
+              Legal representation can be acquired before a University or
+              police report is filed.`,
+    show: false
+  },
+  {
+    id: 'university_support',
+    heading: "University Support",
+    content: `Survivors have access to a variety of protective and academic
+              resources through the Office of the Dean of Students (ODOS).
+              These resources are typically non-confidential. Examples of such
+              resources include: Issuing a No Contact Directive, Modifying Housing
+              Arrangements, Modifying Academic Schedules`,
+    show: false
+  },
+]
+
 const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -58,32 +144,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [
-  {
-    id: 0,
-    heading: "Your Confidentiality",
-    content: `Your answers will not be stored, and our organization will never
-              share your usage data with any other party.`
-  },
-  {
-    id: 1,
-    heading: "Your Choices",
-    content: `No legal jargon and no surprises. Once you select your timeframe,
-              Athena will connect you with relevant resources, sorted by priority
-              and urgency.`
-  },
-  {
-    id: 2,
-    heading: "Your Decisions",
-    content: `Athena will never automatically submit information or contact any
-              resource on your behalf. You control your journey.`
-  }
-]
-
-export default function Album() {
+export default function Album(){
   const classes = useStyles();
 
-  return (
+    return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="relative">
@@ -118,7 +182,7 @@ export default function Album() {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map(card => (
+            {cards.filter(card => card.show === true).map(card => (
               <Grid item key={card.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia

@@ -28,15 +28,10 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.apiStatus);
     return (
       <div className="App">
         <Album />
-        <div className="App-header">
-          <h2>React Rails Docker Container</h2>
-        </div>
-        <p className="App-intro">
-          Api Status: {this.apiStatus}
-        </p>
       </div>
     );
   }

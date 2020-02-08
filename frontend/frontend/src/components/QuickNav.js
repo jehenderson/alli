@@ -11,26 +11,30 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 const survivor = [
   {
     prompt: "Are you injured?",
-    responses: ["Yes", "Unsure", "No"]
+    responses: ["Yes", "Unsure", "No"],
+    selected: false
   },
   {
     prompt: "Do you want to stay at a shelter?",
-    responses: ["Yes", "No"]
+    responses: ["Yes", "No"],
+    selected: false
   },
   {
     prompt: "Do you want to take legal action?",
-    responses: ["Yes", "Maybe Later", "No"]
+    responses: ["Yes", "Maybe Later", "No"],
+    selected: false
   },
   {
     prompt: "Do you want to open a university investigation?",
-    responses: ["Yes", "Maybe", "No"]
+    responses: ["Yes", "Maybe", "No"],
+    selected: false
   }
 ]
 
 const supporter = [
   {
     prompt: "What is your profession?",
-    responses: ["Layer", "Other"]
+    responses: ["Lawyer", "Other"]
   }
 ]
 
