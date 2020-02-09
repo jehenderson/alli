@@ -5,7 +5,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Home from './template/Home';
+import Home from './components/Home';
+import Admin from './components/Admin';
 import './App.css';
 
 const API_ROUTE = '/api/v1';
@@ -42,11 +43,8 @@ class App extends Component {
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/about">
-
-            </Route>
-            <Route path="/users">
-
+            <Route path="/admin">
+              <Admin />
             </Route>
             <Route path="/">
               <Home />
