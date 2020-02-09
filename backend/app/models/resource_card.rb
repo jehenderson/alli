@@ -1,0 +1,2 @@
+class ResourceCard < ApplicationRecord
+end

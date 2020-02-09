@@ -44,7 +44,8 @@ export default class QuickNav extends React.Component {
     this.state = {
       open: false,
       step: 0,
-      choices: props.stakeholder === "survivor" ? survivor : supporter
+      choices: props.stakeholder === "survivor" ? survivor : supporter,
+      selections: []
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -57,11 +58,16 @@ export default class QuickNav extends React.Component {
   };
 
   handleClose() {
-    this.setState(state => ({open: false, step: 0}));
+    this.setState(state => (
+      {open: false, step: 0, selections: []}));
   };
 
   handleChoice() {
-    this.setState(state => ({step: state.step + 1}));
+    if (this.state.step < this.state.choices.length - 1) {
+      this.setState(state => ({step: (state.step + 1)}));
+    } else {
+      console.log(this.state.selections);
+    }
   };
 
   handleBack() {
@@ -88,7 +94,11 @@ export default class QuickNav extends React.Component {
           <DialogActions>
             {this.state.choices[this.state.step].responses.map(option => (
               <Button autoFocus
-                onClick={this.handleChoice}
+                onClick={
+                this.state.step < this.state.choices.length - 1
+                ? this.handleChoice
+                : this.handleClose
+                }
                 color="primary"
                 key={(this.state.step).toString()+": "+option}
               >
