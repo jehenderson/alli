@@ -3,13 +3,13 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Home from './components/Home';
 import Admin from './components/Admin';
 import './App.css';
 
 const API_ROUTE = '/api/v1';
+// const FRONTEND_ROUTES = [];
 
 class App extends Component {
   constructor() {
