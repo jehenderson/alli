@@ -7,7 +7,7 @@ WORKDIR /home/app/frontend
 ADD ./frontend/package.json /home/app/frontend
 ADD ./frontend/yarn.lock /home/app/frontend
 RUN yarn install --silent
-RUN yarn install react-router-dom --silent
+RUN yarn add react-router-dom --silent
 RUN yarn add @material-ui/core --silent
 RUN yarn add @material-ui/icons --silent
 COPY ./frontend /home/app/frontend
