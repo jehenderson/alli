@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Album from './template/Album';
+import Home from './template/Home';
 import './App.css';
 
 const API_ROUTE = '/api/v1';
@@ -49,7 +49,7 @@ class App extends Component {
 
             </Route>
             <Route path="/">
-              <Album />
+              <Home />
             </Route>
           </Switch>
         </div>
