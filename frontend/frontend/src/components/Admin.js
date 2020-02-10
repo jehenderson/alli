@@ -23,7 +23,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -53,17 +53,37 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
-}));
+}));*/
 
-export default function Admin(){
-  const classes = useStyles();
+export default class Admin extends React.Component{
+  //const classes = useStyles();
+  constructor(props) {
+    super(props);
+    this.state = {
+      resources: []
+    }
+  }
 
+  componentDidMount() {
+    fetch('/api/v1/resource_cards')
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({ resources: data })
+    })
+    .catch(console.log)
+  }
+
+  handleDelete() {
+    
+  }
+
+  render() {
     return (
     <React.Fragment>
       <CssBaseline />
       <main>
         {/* Hero unit */}
-        <div className={classes.heroContent}>
+        <div /*className={classes.heroContent}*/>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Athena
@@ -74,16 +94,16 @@ export default function Admin(){
           </Container>
         </div>
         {/* End hero unit */}
-        <Container className={classes.cardGrid} maxWidth="md">
+        <Container /*className={classes.cardGrid}*/ maxWidth="md">
           <Grid container spacing={4} alignItems="center" justify="center">
             <Grid item key="card.id" xs={12} sm={6} md={4}>
-              <Card className={classes.card}>
+              <Card /*className={classes.card}*/>
                 <CardMedia
-                  className={classes.cardMedia}
+                  //className={classes.cardMedia}
                   image="https://source.unsplash.com/random"
                   title="Image title"
                 />
-                <CardContent className={classes.cardContent}>
+                <CardContent /*className={classes.cardContent}*/>
                   <Typography gutterBottom variant="h5" component="h2">
                     Please fill out this form to add a new resource.
                   </Typography>
@@ -93,14 +113,32 @@ export default function Admin(){
             </Grid>
           </Grid>
         </Container>
-        <Container className={classes.cardGrid} maxWidth="md">
-        <Grid container spacing={4} alignItems="center" justify="center">
-        
-        </Grid>
+        <Container /*className={classes.cardGrid}*/ maxWidth="md">
+          <Grid container spacing={4} alignItems="center" justify="center">
+            {this.state.resources.map((card) =>
+              <Grid item key={card.id} xs={12} sm={6} md={4}>
+                <Card /*className={classes.card}*/>
+                  <CardMedia
+                    //className={classes.cardMedia}
+                    image="https://source.unsplash.com/random"
+                    title="Image title"
+                  />
+                  <CardContent /*className={classes.cardContent}*/>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {card.heading}
+                    </Typography>
+                    <Typography>
+                      {card.content}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            )}
+          </Grid>
         </Container>
       </main>
       {/* Footer */}
-      <footer className={classes.footer}>
+      <footer /*className={classes.footer}*/>
         <Typography variant="h6" align="center" gutterBottom>
           Athena
         </Typography>
@@ -111,5 +149,5 @@ export default function Admin(){
       </footer>
       {/* End footer */}
     </React.Fragment>
-  );
+  )}
 }
