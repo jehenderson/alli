@@ -10,6 +10,11 @@ class ResourceCardsController < ApplicationController
     render json: @card, status: :created
   end
 
+  def show
+    @card = ResourceCard.where(id: params[:id]).first
+    render json: @card, status: :ok
+  end
+
   def destroy
     @card = ResourceCard.where(id: params[:id]).first
     if @card.destroy
@@ -21,6 +26,6 @@ class ResourceCardsController < ApplicationController
   private
 
   def card_params
-    params.require(:resource_card).permit(:identifer, :heading, :content, :show)
+    params.require(:resource_card).permit(:identifier, :heading, :content)
   end
 end

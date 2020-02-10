@@ -4,12 +4,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import TextField from '@material-ui/core/TextField';
 import Form from './Form';
 
 function Copyright() {
@@ -89,7 +87,7 @@ export default function Admin(){
                   <Typography gutterBottom variant="h5" component="h2">
                     Please fill out this form to add a new resource.
                   </Typography>
-                  <Form />
+                  <Form url="/api/v1/resource_cards"/>
                 </CardContent>
               </Card>
             </Grid>
