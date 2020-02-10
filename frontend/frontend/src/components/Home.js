@@ -199,10 +199,10 @@ export default class Home extends React.Component{
         <div /*className={classes.heroContent}*/>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Athena
+              Alli
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Athena is a comprehensive and accurate set of resources,
+              Alli is a comprehensive and accurate set of resources,
               delivered with a priority for complete survivor confidentiality
               and actionability.
             </Typography>
