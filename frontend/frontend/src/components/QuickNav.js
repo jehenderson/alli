@@ -10,24 +10,24 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 
 const survivor = [
   {
+    id: "injured",
     prompt: "Are you injured?",
     responses: ["Yes", "Unsure", "No"],
-    selected: false
   },
   {
+    id: "shelter",
     prompt: "Do you want to stay at a shelter?",
     responses: ["Yes", "No"],
-    selected: false
   },
   {
+    id: "legalAction",
     prompt: "Do you want to take legal action?",
     responses: ["Yes", "Maybe Later", "No"],
-    selected: false
   },
   {
+    id: "universityInvestigation",
     prompt: "Do you want to open a university investigation?",
     responses: ["Yes", "Maybe", "No"],
-    selected: false
   }
 ]
 
@@ -38,6 +38,8 @@ const supporter = [
   }
 ]
 
+let selections = [];
+
 export default class QuickNav extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +47,6 @@ export default class QuickNav extends React.Component {
       open: false,
       step: 0,
       choices: props.stakeholder === "survivor" ? survivor : supporter,
-      selections: []
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -58,20 +59,24 @@ export default class QuickNav extends React.Component {
   };
 
   handleClose() {
-    this.setState(state => (
-      {open: false, step: 0, selections: []}));
+    this.setState(state => ({open: false, step: 0}));
+    selections = [];
   };
 
-  handleChoice() {
+  handleChoice(e) {
     if (this.state.step < this.state.choices.length - 1) {
       this.setState(state => ({step: (state.step + 1)}));
-    } else {
-      console.log(this.state.selections);
+      selections.push(e.target.textContent);
+    } else if (this.state.step < this.state.choices.length) {
+      selections.push(e.target.textContent);
+      this.props.getSelections(selections);
+      this.handleClose();
     }
   };
 
-  handleBack() {
+  handleBack(e) {
     this.setState(state => ({step: state.step - 1}));
+    selections.pop();
   };
 
   render() {
@@ -94,11 +99,7 @@ export default class QuickNav extends React.Component {
           <DialogActions>
             {this.state.choices[this.state.step].responses.map(option => (
               <Button autoFocus
-                onClick={
-                this.state.step < this.state.choices.length - 1
-                ? this.handleChoice
-                : this.handleClose
-                }
+                onClick={this.handleChoice}
                 color="primary"
                 key={(this.state.step).toString()+": "+option}
               >
