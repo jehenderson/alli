@@ -1,5 +1,6 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -179,6 +180,9 @@ export default class Home extends React.Component{
     });
   }
 
+  handleSignIn() {
+    console.log("Sign in implementation");
+  }
 
   render() {
     return (
@@ -204,15 +208,12 @@ export default class Home extends React.Component{
             <div /*className={classes.heroButtons}*/>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <QuickNav stakeholder="survivor"
-                  getSelections={this.getSelections}
-                  btnVariant="contained"/>
+                  <QuickNav getSelections={this.getSelections}/>
                 </Grid>
                 <Grid item>
-                  <QuickNav
-                  stakeholder="supporter"
-                  getSelections={this.getSelections}
-                  btnVariant="outlined"/>
+                  <Button variant="outlined" color="primary" onClick={this.handleSignIn}>
+                    How can I help?
+                  </Button>
                 </Grid>
               </Grid>
             </div>

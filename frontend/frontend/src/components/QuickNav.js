@@ -31,13 +31,6 @@ const survivor = [
   }
 ]
 
-const supporter = [
-  {
-    prompt: "What is your profession?",
-    responses: ["Lawyer", "Other"]
-  }
-]
-
 let selections = [];
 
 export default class QuickNav extends React.Component {
@@ -46,7 +39,7 @@ export default class QuickNav extends React.Component {
     this.state = {
       open: false,
       step: 0,
-      choices: props.stakeholder === "survivor" ? survivor : supporter,
+      choices: survivor
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -82,8 +75,8 @@ export default class QuickNav extends React.Component {
   render() {
     return (
       <div>
-        <Button variant={this.props.btnVariant} color="primary" onClick={this.handleClickOpen}>
-          {this.props.stakeholder === "survivor" ? "What are my options?" : "How can I help?"}
+        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
+          What are my options?
         </Button>
         <Dialog
           fullScreen={false}
