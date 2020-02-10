@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import TextField from '@material-ui/core/TextField';
+import Form from './Form';
 
 function Copyright() {
   return (
@@ -85,11 +87,9 @@ export default function Admin(){
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="h5" component="h2">
-                    card.heading
+                    Please fill out this form to add a new resource.
                   </Typography>
-                  <Typography>
-                    card.content
-                  </Typography>
+                  <Form />
                 </CardContent>
               </Card>
             </Grid>
