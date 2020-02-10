@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import QuickNav from '../components/QuickNav';
 import SideMenu from '../components/PulloutMenu';
+import logIn from '../functions/linkedInLogin';
 
 function Copyright() {
   return (
@@ -181,7 +182,7 @@ export default class Home extends React.Component{
   }
 
   handleSignIn() {
-    console.log("Sign in implementation");
+    logIn();
   }
 
   render() {
