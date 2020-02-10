@@ -220,7 +220,7 @@ export default class Home extends React.Component{
         </div>
         <Container /*className={classes.cardGrid}*/ maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={4}>
+          <Grid container spacing={4} alignItems="center" justify="center">
             {this.state.display.map(card => (
                 <Grid item key={card.id} xs={12} sm={6} md={4}>
                   <Card /*className={classes.card}*/>
