@@ -6,7 +6,7 @@ module AuthHelper
   CLIENT_SECRET = ENV["LINKEDIN_SECRET"]
 
   # Scopes required by the app
-  SCOPES = [ 'r_liteprofile',
+  SCOPES = [ 'r_basicprofile',
              'r_emailaddress']
 
   REDIRECT_URI = "http://localhost/api/v1/auth/linkedin/callback"
