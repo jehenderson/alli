@@ -1,4 +1,4 @@
-class SupporterController < ApplicationController
+class SupportersController < ApplicationController
   def index
     @cards = Supporter.all
     render json: @cards, status: :ok
