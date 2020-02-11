@@ -28,6 +28,9 @@ gem 'rack-cors'
 # Wrapper for OAuth2 spec
 gem 'oauth2'
 
+# Store sessions to database
+gem 'activerecord-session_store'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
