@@ -268,7 +268,7 @@ export default class Home extends React.Component{
       {/* Footer */}
       <footer /*className={classes.footer}*/>
         <Typography variant="h6" align="center" gutterBottom>
-          Athena
+          Alli
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           You are not alone.
