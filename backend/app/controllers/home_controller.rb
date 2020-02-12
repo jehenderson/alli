@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
-  include AuthHelper
   def index
-    render json: { message: get_login_url }
+    render json: { message: "Working" }
   end
 end

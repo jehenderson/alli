@@ -4,6 +4,10 @@ class AuthController < ApplicationController
   def gettoken
     token = get_token_from_code params[:code]
     session[:linkedin_token] = token.to_hash
-    redirect_to "/supporters"
+    redirect_to "/api/v1/supporters"
+  end
+
+  def getredirect
+    render json: {url: get_login_url}
   end
 end

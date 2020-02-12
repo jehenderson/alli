@@ -13,7 +13,6 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import QuickNav from '../components/QuickNav';
 import SideMenu from '../components/PulloutMenu';
-import logIn from '../functions/linkedInLogin';
 
 function Copyright() {
   return (
@@ -167,8 +166,32 @@ export default class Home extends React.Component{
           content: `Athena will never automatically submit information or contact any
                     resource on your behalf. You control your journey.`
         }
-      ]
+      ],
+      linkedinUrl: "",
+      linkedinLoaded: false
     };
+  }
+
+  componentDidMount() {
+    fetch("/api/v1/auth/linkedin/url")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            linkedinLoaded: true,
+            linkedinUrl: result.url
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            linkedinLoaded: true,
+            error
+          });
+        }
+      )
   }
 
   getSelections = (dataFromNav) => {
@@ -179,10 +202,6 @@ export default class Home extends React.Component{
     this.setState({
       display: cardsToDisplay
     });
-  }
-
-  handleSignIn() {
-    logIn();
   }
 
   render() {
@@ -212,7 +231,7 @@ export default class Home extends React.Component{
                   <QuickNav getSelections={this.getSelections}/>
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary" onClick={this.handleSignIn}>
+                  <Button variant="outlined" color="primary" href={this.state.linkedinUrl}>
                     How can I help?
                   </Button>
                 </Grid>
