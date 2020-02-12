@@ -1,7 +1,7 @@
 class SupportersController < ApplicationController
   def index
     @cards = Supporter.all
-    render text: "redirected to supporters"#json: @cards, status: :ok
+    render json: @cards, status: :ok
   end
 
   def create
