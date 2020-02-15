@@ -63,7 +63,7 @@ export default function Admin() {
     fetch('/api/v1/resource_cards')
       .then(res => res.json())
       .then((data) => {
-        setResources(data)
+        setResources(data);
       })
       .catch(console.log)
   });

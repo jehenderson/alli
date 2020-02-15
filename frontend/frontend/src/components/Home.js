@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -8,7 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-// import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import QuickNav from '../components/QuickNav';
@@ -47,7 +47,7 @@ const cards = [
     content: `Athena will never automatically submit information or contact any
               resource on your behalf. You control your journey.`
   },
-  {
+  /*{
     id: 'medical',
     heading: "Medical Care",
     content: `Concerned about injuries, sexually-transmitted diseases,
@@ -105,10 +105,10 @@ const cards = [
               These resources are typically non-confidential. Examples of such
               resources include: Issuing a No Contact Directive, Modifying Housing
               Arrangements, Modifying Academic Schedules`
-  },
+  },*/
 ]
 
-/*const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -140,142 +140,100 @@ const cards = [
   },
 }));
 
-const classes = useStyles();*/
+export default function Home() {
+  const classes = useStyles();
+  const [linkedinUrl, setLinkedinUrl] = useState();
+  const [display, setDisplay] = useState(cards);
 
-export default class Home extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      display: [
-        {
-          id: 'confidentiality',
-          heading: "Your Confidentiality",
-          content: `Your answers will not be stored, and our organization will never
-                    share your usage data with any other party.`
-        },
-        {
-          id: 'choices',
-          heading: "Your Choices",
-          content: `No legal jargon and no surprises. Once you select your timeframe,
-                    Athena will connect you with relevant resources, sorted by priority
-                    and urgency.`
-        },
-        {
-          id: 'decisions',
-          heading: "Your Decisions",
-          content: `Athena will never automatically submit information or contact any
-                    resource on your behalf. You control your journey.`
-        }
-      ],
-      linkedinUrl: "",
-      linkedinLoaded: false
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     fetch("/api/v1/auth/linkedin/url")
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            linkedinLoaded: true,
-            linkedinUrl: result.url
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            linkedinLoaded: true,
-            error
-          });
+          setLinkedinUrl(result.url);
         }
       )
-  }
+  });
 
-  getSelections = (dataFromNav) => {
+  const getSelections = (dataFromNav) => {
     let cardsToDisplay = []
     dataFromNav.forEach((choice, index) => {
       if(choice !== 'No') {cardsToDisplay.push(cards[index+3])};
     })
-    this.setState({
-      display: cardsToDisplay
-    });
+    setDisplay(cardsToDisplay);
   }
 
-  render() {
-    return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <SideMenu />
-        </Toolbar>
-      </AppBar>
-      <main>
-        {/* Hero unit */}
-        <div /*className={classes.heroContent}*/>
-          <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Alli
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Alli is a comprehensive and accurate set of resources,
-              delivered with a priority for complete survivor confidentiality
-              and actionability.
-            </Typography>
-            <div /*className={classes.heroButtons}*/>
-              <Grid container spacing={2} justify="center">
-                <Grid item>
-                  <QuickNav getSelections={this.getSelections}/>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary" href={this.state.linkedinUrl}>
-                    How can I help?
-                  </Button>
-                </Grid>
+  return (
+  <React.Fragment>
+    <CssBaseline />
+    <AppBar position="relative">
+      <Toolbar>
+        <SideMenu />
+      </Toolbar>
+    </AppBar>
+    <main>
+      {/* Hero unit */}
+      <div className={classes.heroContent}>
+        <Container maxWidth="sm">
+          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            Alli
+          </Typography>
+          <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            Alli is a comprehensive and accurate set of resources,
+            delivered with a priority for complete survivor confidentiality
+            and actionability.
+          </Typography>
+          <div className={classes.heroButtons}>
+            <Grid container spacing={2} justify="center">
+              <Grid item>
+                <QuickNav getSelections={getSelections}/>
               </Grid>
-            </div>
-          </Container>
-        </div>
-        <Container /*className={classes.cardGrid}*/ maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4} alignItems="center" justify="center">
-            {this.state.display.map(card => (
-                <Grid item key={card.id} xs={12} sm={6} md={4}>
-                  <Card /*className={classes.card}*/>
-                    <CardMedia
-                      //className={classes.cardMedia}
-                      image="https://source.unsplash.com/random"
-                      title="Image title"
-                    />
-                    <CardContent /*className={classes.cardContent}*/>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {card.heading}
-                      </Typography>
-                      <Typography>
-                        {card.content}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))
-            }
-          </Grid>
+              <Grid item>
+                <Button variant="outlined" color="primary" href={linkedinUrl}>
+                  How can I help?
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
         </Container>
-      </main>
-      {/* Footer */}
-      <footer /*className={classes.footer}*/>
-        <Typography variant="h6" align="center" gutterBottom>
-          Alli
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          You are not alone.
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
-    </React.Fragment>
-  );}
+      </div>
+      <Container className={classes.cardGrid} maxWidth="md">
+        {/* End hero unit */}
+        <Grid container spacing={4} alignItems="center" justify="center">
+          {display.map(card => (
+              <Grid item key={card.id} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image="https://source.unsplash.com/random"
+                    title="Image title"
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {card.heading}
+                    </Typography>
+                    <Typography>
+                      {card.content}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          }
+        </Grid>
+      </Container>
+    </main>
+    {/* Footer */}
+    <footer className={classes.footer}>
+      <Typography variant="h6" align="center" gutterBottom>
+        Alli
+      </Typography>
+      <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+        You are not alone.
+      </Typography>
+      <Copyright />
+    </footer>
+    {/* End footer */}
+  </React.Fragment>
+  )
 }
