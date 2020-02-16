@@ -1,6 +1,11 @@
 class SupportersController < ApplicationController
+  include AuthHelper
   def index
-    render json: {"session": session[:linkedin_token]}
+    resp = Faraday.get('https://api.linkedin.com/v2/me') do |req|
+      req.headers['Content-Type'] = "application/json"
+      req.headers['Authorization'] = "Bearer #{get_access_token}"
+    end
+    render text: resp.body
     # @cards = Supporter.all
     # render json: @cards, status: :ok
   end
