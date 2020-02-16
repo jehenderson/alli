@@ -28,6 +28,9 @@ gem 'rack-cors'
 # Wrapper for OAuth2 spec
 gem 'oauth2'
 
+# Working with JSON
+gem 'json'
+
 # Store sessions to database
 gem 'activerecord-session_store'
 
