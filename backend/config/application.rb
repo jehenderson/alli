@@ -38,6 +38,10 @@ module Backend
       end
     end
 
+    config.session_store :cookie_store, key: '_alli_session', secure: true # <-- this also configures session_options for use below
+    config.middleware.use ActionDispatch::Cookies # Required for all session management (regardless of session_store)
+    config.middleware.use config.session_store, config.session_options
+
     config_files = ['secrets.yml']
 
     config_files.each do |file_name|

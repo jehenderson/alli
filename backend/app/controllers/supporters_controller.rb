@@ -1,7 +1,8 @@
 class SupportersController < ApplicationController
   def index
-    @cards = Supporter.all
-    render json: @cards, status: :ok
+    render json: {"session": session[:linkedin_token]}
+    # @cards = Supporter.all
+    # render json: @cards, status: :ok
   end
 
   def create
