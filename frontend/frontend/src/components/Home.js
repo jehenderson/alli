@@ -47,7 +47,7 @@ const cards = [
     content: `Athena will never automatically submit information or contact any
               resource on your behalf. You control your journey.`
   },
-  /*{
+  {
     id: 'medical',
     heading: "Medical Care",
     content: `Concerned about injuries, sexually-transmitted diseases,
@@ -105,7 +105,7 @@ const cards = [
               These resources are typically non-confidential. Examples of such
               resources include: Issuing a No Contact Directive, Modifying Housing
               Arrangements, Modifying Academic Schedules`
-  },*/
+  },
 ]
 
 const useStyles = makeStyles(theme => ({
