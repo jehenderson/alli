@@ -30,12 +30,13 @@ class AuthController < ApplicationController
     }
 
     if Supporter.find_by linkedin_id: supporter_data[:linkedin_id]
-      redirect "/"
+      redirect_to "/admin"
     else
-      Faraday.post('http://localhost/api/v1/supporters', supporter_data)
+      @supporter = Supporter.new(supporter_data)
+      @supporter.save
+      redirect_to "/"
     end
 
-    redirect_to "/api/v1/supporters"
   end
 
   def getredirect

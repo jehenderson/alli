@@ -1,24 +1,23 @@
 class SupportersController < ApplicationController
   def index
-    
-    # @cards = Supporter.all
-    # render json: @cards, status: :ok
+    @supporters = Supporter.all
+    render json: @supporters, status: :ok
   end
 
   def create
-    @card = Supporter.new(support_params)
-    @card.save
-    render json: @card, status: :created
+    @supporter = Supporter.new(support_params)
+    @supporter.save
+    render json: @supporter, status: :created
   end
 
   def show
-    @card = Supporter.where(id: params[:id]).first
-    render json: @card, status: :ok
+    @supporter = Supporter.where(id: params[:id]).first
+    render json: @supporter, status: :ok
   end
 
   def destroy
-    @card = Supporter.where(id: params[:id]).first
-    if @card.destroy
+    @supporter = Supporter.where(id: params[:id]).first
+    if @supporter.destroy
       head(:ok)
     else head(:unprocessable_entity)
     end
@@ -27,6 +26,6 @@ class SupportersController < ApplicationController
   private
 
   def support_params
-    params.require(:supporter).permit(:first_name, :last_name, :profile_picture, :email)
+    params.require(:supporter).permit(:first_name, :last_name, :email, :linkedin_id)
   end
 end
